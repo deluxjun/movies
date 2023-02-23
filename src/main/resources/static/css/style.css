@@ -1,0 +1,73 @@
+
+.navbar-bottom{
+    border-bottom: 4px black solid;
+    box-shadow: 2px 2px 10px 2px black;
+    background: transparent;
+}
+
+.details-card{
+    background: transparent;
+    box-shadow: 2px 2px 15px 4px #616161;
+}
+
+body{
+    background: #000;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-container{
+    padding-top: 135px;
+}
+
+.noshow{
+    position: absolute;
+    padding-top: 135px;
+}
+
+.custom-navigation-bar {
+    padding-top : 2px;
+    padding-bottom : 2px;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
+    transition: all 0.8s;
+}
+
+.body-background{
+    height: 100vh;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+}
+.wrapper, .search-data{
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.wrapper{
+  position: fixed;
+  height: 0px;
+  width: 0px;
+  border-radius: 100%;
+  background: linear-gradient(-135deg, transparent, transparent);
+  transition: all 0.4s linear;
+}
+.wrapper.active{
+  height: 4000px;
+  width: 4000px;
+}
+
+.error-404{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}

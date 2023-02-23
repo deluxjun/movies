@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>MOVIES</title>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/mdb.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+
+</head>
+<body>
+	<header>
+		<nav
+				class="navbar-bottom navbar navbar-expand-lg navbar-dark fixed-top">
+			<div class="collapse navbar-collapse" id="basicExampleNav">
+				<form class="form-inline my-2 my-lg-0" method="get" action="/list">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="title">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+	</header>
+
+	<div class="">
+		<div
+			class="mask rgba-black-light justify-content-center align-items-center">
+			<div class="container custom-container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<div style="display: inline-flex;">
+							<h1 id="title" class="text-white" th:text="${movie.title}"></h1>
+							<span id="toggle-button" style="width: 50px;" class="fas fa-edit text-white"></span>
+						</div>
+						<div id="update-area" style="display: none;">
+							<input id="input-title" class="mr-sm-2" type="text" th:value="${movie.title}" name="title">
+							<button id="update" class="btn btn-outline-success my-2 my-sm-0" type="submit">Update</button>
+						</div>
+						<input type="hidden" id="movie-id" th:value="${movie.imdbId}">
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-12 text-center">
+						<img th:src="@{{imgurl}(imgurl=${movie.poster})}"
+							alt="MOVIE POSTER" class=" mx-auto d-block">
+					</div>
+				</div>
+				<div class="d-flex justify-content-center mt-2">
+					<div
+						class='text-white p-2 font-weight-bold h5-responsive ml-2 mr-1'
+						th:text="${movie.released}">24 Mar 1972</div>
+					<div class='text-white p-2 font-weight-bold h5-responsive '
+						th:text="${movie.runtime}">175 min</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row mt-4">
+					<div class="col-12 text-center">
+						<div class="card details-card py-2">
+							<div class="rgba-black-light">
+								<div class="row my-3">
+									<div class="col-4">
+										<div class="h6 text-white">Director</div>
+									</div>
+									<div class="col-8">
+										<div class="text-white" th:text="${movie.director}"></div>
+									</div>
+								</div>
+								<div class="row my-3">
+									<div class="col-4">
+										<div class="h6 text-white">Language(s)</div>
+									</div>
+									<div class="col-8">
+										<div class="text-white" th:text="${movie.language}"></div>
+									</div>
+								</div>
+								<div class="row my-3">
+									<div class="col-4">
+										<div class="h6 text-white">Actors</div>
+									</div>
+									<div class="col-8">
+										<div class="text-white" th:text="${movie.actors}"></div>
+									</div>
+								</div>
+								<div class="row my-3">
+									<div class="col-4">
+										<div class="h6 text-white">Writer(s)</div>
+									</div>
+									<div class="col-8">
+										<div class="text-white" th:text="${movie.writer}"></div>
+									</div>
+								</div>
+								<div class="row my-3">
+									<div class="col-4">
+										<div class="h6 text-white">Plot</div>
+									</div>
+									<div class="col-8">
+										<div class="text-white" th:text="${movie.plot}"></div>
+									</div>
+								</div>
+								<div class="row my-3">
+									<div class="col-4">
+										<div class="h6 text-white">Award(s)</div>
+									</div>
+									<div class="col-8">
+										<div class="text-white" th:text="${movie.awards}"></div>
+									</div>
+								</div>
+								<div class="row my-3">
+									<div class="col-4">
+										<div class="h6 text-white">Rating</div>
+									</div>
+									<div class="col-8">
+										<div class="text-white" th:text="${movie.imdbRating}">8.4</div>
+									</div>
+								</div>
+								<div class="row my-3">
+									<div class="col-4">
+										<div class="h6 text-white">Production</div>
+									</div>
+									<div class="col-8">
+										<div class="text-white" th:text="${movie.production}"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script>
+		$(document).ready(function(){
+			$("#update").click(function(){
+				$.post("update",
+						{
+							id: $('#movie-id').val(),
+							title: $('#input-title').val()
+						})
+						.done(function(msg){
+							$('#title').text($('#input-title').val());
+							$("#update-area").hide();
+						}
+				);
+			});
+
+			$("#toggle-button").click(function(){
+				$("#update-area").toggle();
+			});
+		});
+	</script>
+</body>
+
+</html>

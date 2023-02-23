@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>MOVIES</title>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/mdb.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+	<header>
+		<nav
+			class="navbar-bottom navbar navbar-expand-lg navbar-dark fixed-top">
+			<div class="collapse navbar-collapse" id="basicExampleNav">
+				<form class="form-inline my-2 my-lg-0" method="get" action="/list">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="title">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+	</header>
+
+	<div class="">
+		<div class="my-4 card-columns">
+			<div class="noshow" th:if="${#lists.isEmpty(movies)}">
+				<h1 class="text-white">There's no movie to show</h1>
+			</div>
+			<div th:unless="${#lists.isEmpty(movies)}">
+				<div class="card" th:each="movie : ${movies}">
+					<a th:href="@{'/movie?id=' + ${movie.imdbId}}">
+						<img class="card-img-top"
+							 th:src="@{__(${movie.poster} ? ${movie.poster} : '/image/noposter.jpeg')__}">
+					</a>
+					<div class="card-body">
+						<h5 class="card-title" th:text="${movie.title}"></h5>
+						<p class="card-text" th:text="${movie.year}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+	</div>
+
+</body>
+
+</html>
